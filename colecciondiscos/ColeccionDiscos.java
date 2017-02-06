@@ -21,8 +21,13 @@ public class ColeccionDiscos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        discos[0] = new Disco("a", "n", "d", 5);
         boolean fin = false;
         int n = 0;
+        String t = "";
+        for(int i=0;i<discos.length;i++){
+            discos[i]= new Disco("vacio","vacio","vacio",0);
+        }
         do {
             System.out.println("1. Insertar disco\n"
                     + "2. Listar\n"
@@ -34,9 +39,24 @@ public class ColeccionDiscos {
                 case 1:
 
                     for (int i = 0; i < discos.length; i++) {
-                        if (discos[i] == null) {
-                            System.out.println("Titulo: ");
-                            String t = s.nextLine();
+                        if (discos[i].getTitulo().equals("vacio")) {
+                            boolean rep = false;
+                            do {
+                                rep=false;
+                                System.out.println("Titulo: ");
+                                t = s.nextLine();
+                              
+                                for (Disco disco : discos) {
+                                    if (!disco.getTitulo().equals("vacio")) {
+                                        if (disco.getTitulo().equals(t)) {
+                                            rep = true;
+                                            System.out.println("Titulo repetido, vuelve a intentarlo.");
+                                            
+                                        }
+                                    }
+                                }
+                            } while (rep);
+
                             System.out.println("Autor: ");
                             String a = s.nextLine();
                             System.out.println("Genero: ");
@@ -45,7 +65,7 @@ public class ColeccionDiscos {
                             double du = Double.parseDouble(s.nextLine());
                             discos[i] = new Disco(t, a, g, du);
                             break;
-                        }else if(i==discos.length-1){
+                        } else if (i == discos.length - 1 && !discos[i].getTitulo().equals("vacio")) {
                             System.out.println("No queda sitio,borra un disco para seguir.");
                             break;
                         }
@@ -59,13 +79,13 @@ public class ColeccionDiscos {
                     break;
                 case 3:
                     System.out.println("Titulo: ");
-                    String t = s.nextLine();
+                    t = s.nextLine();
                     for (int i = 0; i < discos.length; i++) {
-                        if (discos[i] != null) {
-                            if(discos[i].getTitulo().equals(t)){
-                                discos[i] = null;
+                        if (!discos[i].getTitulo().equals("vacio")) {
+                            if (discos[i].getTitulo().equals(t)) {
+                                discos[i] = new Disco("vacio","vacio","vacio",0);
                                 break;
-                            }  
+                            }
                         }
                     }
                     break;

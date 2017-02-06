@@ -14,7 +14,8 @@ public class Disco {
     private String autor;
     private String genero;
     private double duracion;
-
+      
+    
     public Disco(String titulo, String autor, String genero, double duracion) {
         this.titulo = titulo;
         this.autor = autor;
@@ -59,5 +60,29 @@ public class Disco {
         return "Disco{" + "titulo=" + titulo + ", autor=" + autor + ", genero=" + genero + ", duracion=" + duracion + '}';
     }
     
+    public static boolean tituloRepetido(String t,Disco[] discos){
+        boolean repetido = false;
+        for(int i=0;i<discos.length;i++){
+            if(!discos[i].equals(null)){
+                if(discos[i].getTitulo().equals(t)){
+                    return repetido = true;
+                }
+            }
+            
+        }
+        return repetido;
+    }
     
+    public static String compruebaTituloRepetido(String t,Disco[] discos){
+        String repetido = "no";
+        for(int i=0;i<discos.length;i++){
+
+                if(discos[i].getTitulo().equals(t)){
+                    return repetido = t;
+                }
+            
+        }
+        return repetido;
+    }
 }
+
